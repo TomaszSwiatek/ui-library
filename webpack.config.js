@@ -14,15 +14,21 @@ module.exports = {
     publicPath: "/assets/" //only path from dist folder to folder which include js files. in truth we set up the same path like above for output but for virtual server to watchin our project. this ONLY RUNS OUR FILES IN VIRTUAL MEMORY OF WEBPACK.
   },
   module: {
-    rules: [{
-      test: /\.js$/,   //to znaczy że na końcu musi być .js kazdego pliku.
-      exclude: /node_modules/,  //to tez wyrazenie regularne ktore kaze pomijac pliki w całym folderze node_modules bo inaczej tez babel by tam robil robote.
-      use: {
-        loader: 'babel-loader', //to zmieniania kodu używać babel-loadera- pewnie sa tez inne loadery.
-        options: {
-          presets: ['@babel/preset-env']  //this is the same preset which we used with only babel compilator.
+    rules: [
+      {
+        test: /\.js$/, //to znaczy że na końcu musi być .js kazdego pliku.
+        exclude: /node_modules/, //to tez wyrazenie regularne ktore kaze pomijac pliki w całym folderze node_modules bo inaczej tez babel by tam robil robote.
+        use: {
+          loader: "babel-loader", //to zmieniania kodu używać babel-loadera- pewnie sa tez inne loadery.
+          options: {
+            presets: ["@babel/preset-env"] //this is the same preset which we used with only babel compilator.
+          }
         }
+      }, //ponizej tworzymy rules dla kompilowania plikow css:
+      {
+        test: /\.css$/, //ma sie konczyc na .css
+        use: ["style-loader", "css-loader"] //tutaj kolejosc jest wazna - kod czytany jest tu od PRAWEJ DO LEWEJ I wpierw musi byc uzyty css loader by potem mogl dzialac styleloader! style loader dodaje przerobione pliki do htmlk by mogly byc wyswietlone. te loadery dzialaja tylko GDY DODAMY IMPORT DO INDEX.JS KTORY jest podlinkowany do html w dist.
       }
-    }]
+    ]
   }
 };
