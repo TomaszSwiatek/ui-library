@@ -1,0 +1,35 @@
+.tooltip {
+  position: relative;
+  font-weight: bold;
+}
+.tip {
+  visibility: hidden;
+  width: 150px;
+  opacity: 0.3;
+  transition: opacity 0.7s ease;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  background-color: orange;
+  font-weight: normal;
+  border-radius: 3px;
+  padding: 0.5em;
+  text-align: center;
+  margin-left: -75px;
+}
+.tip::after{
+  content: "";
+  position:absolute;
+  left: 50%;
+  top:100%;
+  /* these styles are only for little triangle at the bottom of tip */
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent;
+  border-top-color: orange;
+}
+.active {
+  visibility: visible;
+  opacity: 0.9;
+}
